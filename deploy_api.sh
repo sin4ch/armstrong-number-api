@@ -28,8 +28,6 @@ sudo systemctl enable docker
 
 echo "Adding current user ($USER) to the docker group..."
 sudo usermod -aG docker $USER
-echo "!!! IMPORTANT: You may need to log out and log back in for Docker group changes to take effect fully !!!"
-# newgrp docker || true # Keep this commented or remove if not needed
 
 echo "Cloning repository from $REPO_URL..."
 if [ -d "$PROJECT_DIR" ]; then
@@ -41,25 +39,25 @@ cd "$PROJECT_DIR"
 echo "Successfully cloned and entered $PROJECT_DIR"
 
 echo "Building Docker image $IMAGE_NAME..."
-docker build -t "$IMAGE_NAME" .
+sudo docker build -t "$IMAGE_NAME" .
 
 echo "Checking for existing container $CONTAINER_NAME..."
-if [ "$(docker ps -q -f name=$CONTAINER_NAME)" ]; then
+if [ "$(sudo docker ps -q -f name=$CONTAINER_NAME)" ]; then
     echo "Stopping existing container $CONTAINER_NAME..."
-    docker stop "$CONTAINER_NAME"
+    sudo docker stop "$CONTAINER_NAME"
 fi
-if [ "$(docker ps -aq -f status=exited -f name=$CONTAINER_NAME)" ]; then
+
+if [ "$(sudo docker ps -aq -f status=exited -f name=$CONTAINER_NAME)" ]; then
     echo "Removing existing container $CONTAINER_NAME..."
-    docker rm "$CONTAINER_NAME"
+    sudo docker rm "$CONTAINER_NAME"
 fi
 
 echo "Running Docker container $CONTAINER_NAME..."
-docker run -d \
+sudo docker run -d \
   --name "$CONTAINER_NAME" \
   -p 127.0.0.1:8000:8000 \
   --restart always \
   "$IMAGE_NAME"
-
 echo "Container $CONTAINER_NAME started."
 
 echo "Installing Nginx..."
