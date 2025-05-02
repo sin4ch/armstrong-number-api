@@ -1,4 +1,4 @@
-# Armstrong Number API
+# Number Classification API
 
 ## Description
 
