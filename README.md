@@ -155,7 +155,7 @@ Example:
 The script will perform the following actions:
 
 * Update system packages.
-* Install Git, Docker, and Nginx.
+* Install Docker and Nginx.
 * Configure Docker permissions.
 * Clone the latest code from the repository.
 * Build the Docker image.
