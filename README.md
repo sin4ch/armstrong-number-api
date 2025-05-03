@@ -1,4 +1,5 @@
 # Number Classification API
+![image](https://github.com/user-attachments/assets/bca21ff3-05fd-4a9c-a33c-b212fa6c4c2c)
 
 ## Description
 
