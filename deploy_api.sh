@@ -19,8 +19,8 @@ echo "--- Starting Deployment for $SERVER_NAME ---"
 echo "Updating system packages..."
 sudo apt update -y
 
-echo "Installing Git and Docker..."
-sudo apt install git docker.io -y
+echo "Installing Docker..."
+sudo apt install docker.io -y
 
 echo "Starting and enabling Docker service..."
 sudo systemctl start docker
